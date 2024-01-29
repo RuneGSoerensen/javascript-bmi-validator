@@ -6,8 +6,17 @@
     <title>BMI Calculator with user validation</title>
 </head>
 <body>
-
-    <button onclick="startScript()">Start javascript her</button>
+    <form>
+        <label for="height">Højde I cm:</label>
+        <input type="number" name="height" id="height" required>
+        <br><br>
+        <label for="height">Vægt I Kg:</label>
+        <input type="number" name="weight" id="weight" required>
+        <br>
+        <button type="button" onclick="calculateBmi()">Start javascript her</button>
+    </form>
+    <p id="bmiOutput"></p>
+    <p id="inputError"></p>
 <script src="js/script.js"></script>
 </body>
 </html>

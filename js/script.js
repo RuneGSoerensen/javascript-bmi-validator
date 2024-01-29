@@ -1,25 +1,33 @@
-"use strict";
 
-function startScript() {
+function test() {
+    var height = parseFloat(document.getElementById("height").value);
+    var weight = parseFloat(document.getElementById("weight").value);
+    console.log(height);
+    console.log(weight);
+    document.getElementById("bmiOutput").innerHTML = "Din bmi: " + height + "Kategori" + weight;
+}
+
+
+function calculateBmi() {
     
-    //  Her spørger vi i en prompt om brugerens høje 
-    // parseInt er en JS funktion der konventerer strengen til et heltal
+    // indtastede string bliver konverteret til integer og afrundet, fra input id "height"
+    let height = parseInt(document.getElementById("height").value);
 
-    let heightInput = prompt("Din højde i cm?");
-    let height = parseInt(heightInput);
+    // indtastede string bliver konverteret til integer og afrundet, fra input id "weight"
+    let weight = parseInt(document.getElementById("weight").value);
 
-    // Her spørger vi om brugerens højde 
-    let weightInput = prompt("Hvor meget vejer du");
-    let weight = parseInt(weightInput);
 
-    // Vi bruger boolean'en if til at vise udfaldet af brugerens tal. For at 
-    // at brugeren indtaster tal og ikke bogstaver/symboler bruger vi isNaN, som er en funktion JS kender i forvejen. 
+    // javascript validator som bruger OR statements til at gennem gå forskellige validators som negativ tal og tal.
+    // Dog gøres det her faktisk også i html, igennem input types.
+    // og hvis intet skrives i felterne bliver teksten "Du mangler at indtaste din højde og vægt." printet ud i <p id="inputError"></p>
     if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
-        // Hvis ikke brugeren indtaster tal kommer der en alert med følgende info
-        alert("Indtast et valid højde og vægt")
+        document.getElementById("inputError").innerHTML = "Du mangler at indtaste din højde og vægt."
     } else {
+        // bmi er = vægt diviederet med højde / 100^2
         let bmi = weight / Math.pow(height / 100, 2)
 
+
+        // Vores if else statements som viser den rigtige kategori udfra din BMI.
         let bmiKategori;
         if(bmi < 16) {
             bmiKategori = "Meget undervægtig"
@@ -34,15 +42,14 @@ function startScript() {
         } else if (bmi >= 35 && bmi <= 39.9) {
             bmiKategori = "Meget overvægtig";
         } else {
-            bmiKategori = "ER DU SIKKER?";
+            bmiKategori = "THOOOOOCCCCC";
         }
-
-        // Her bliver der så lavet en alert som printer din bmi
-        // ${bmi.toFixed(2)} indæstter bmi og tillader 2 dicimal tal.
-        // \n er det samme som et <br> i html, den skifter linje.
-        // ${bmiKategori} indæstter bmiKategori fra vores if else statements fra linje 14 til 29
         
-        alert(`Your BMI ${bmi.toFixed(2)}. \nKategori: ${bmiKategori}`)
+        // Her bruger jeg id'er til at ændre noget tekst til den rigtige bmi og bmi kategori til <p id="bmiOutput"></p>
+        // Der bliver brugt toFixed(2) for at holde decimalerne til 2 cifrede.
+        document.getElementById("bmiOutput").innerHTML = "Din bmi:" + bmi.toFixed(2) + "<br/>Kategori: " + bmiKategori;
+        console.log(bmi);
+        console.log(bmiKategori);
         
     }
 }
